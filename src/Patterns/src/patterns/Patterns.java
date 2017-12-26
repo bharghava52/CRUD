@@ -51,15 +51,18 @@ public class Patterns {
             int value = 0;
             while (true)
             {
-                synchronized (this)
-                {
-                    while (list.size()==2)
-                        wait();
+                //synchronized (this)      //as we only need the producer to produce he need not to worry about the synchronized
+                //{
+                    if (list.size()==2)
+                        //wait();
+                        Thread.sleep(1000);
+                    else{
                     System.out.println("Producer produced:"+ value);
                     list.add(value++);
                     //notify();
                     Thread.sleep(1000);
-                }
+                    }
+                //}
             }
         }
         
@@ -67,15 +70,18 @@ public class Patterns {
         {
             while (true)
             {
-                synchronized (this)
-                {
-                    while (list.size()==0)
-                        wait();
-                    int val = list.removeFirst();
-                    System.out.println("Consumer consumed:"+ val);
-                    notify();
-                    Thread.sleep(1000);
-                }
+                //synchronized (this)
+                //{
+                  if (list.size()==0)
+                      //wait();
+                      Thread.sleep(1000);
+                  else{
+                  int val = list.removeFirst();
+                  System.out.println("Consumer consumed:"+ val);
+                  //notify();
+                  Thread.sleep(1000);
+                  }
+                //}
             }
         }
     }
