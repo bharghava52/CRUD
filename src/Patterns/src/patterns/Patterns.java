@@ -51,16 +51,18 @@ public class Patterns {
             int value = 0;
             while (true)
             {
-                //synchronized (this)      //as we only need the producer to produce he need not to worry about the synchronized
+                //synchronized (this)    //as we only need the producer to produce he need not to worry about the synchronized
                 //{
                     if (list.size()==2)
                         //wait();
                         Thread.sleep(1000);
                     else{
+                        synchronized(list){
                     System.out.println("Producer produced:"+ value);
                     list.add(value++);
                     //notify();
                     Thread.sleep(1000);
+                        }
                     }
                 //}
             }
@@ -76,10 +78,12 @@ public class Patterns {
                       //wait();
                       Thread.sleep(1000);
                   else{
+                  synchronized(list){    
                   int val = list.removeFirst();
                   System.out.println("Consumer consumed:"+ val);
                   //notify();
                   Thread.sleep(1000);
+                  }
                   }
                 //}
             }
