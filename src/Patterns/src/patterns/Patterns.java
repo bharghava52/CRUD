@@ -9,6 +9,7 @@ public class Patterns {
         //TODO : This should be running indefinitely
         //TODO : Shouldn't stop until I exit from app.
         //TODO : Change this to two producers and four consumers.
+        //TODO : Comment what the removed code does : join , wait , notify etc
         final Resource resource = new Resource();
         Thread t1 = new Thread(new Runnable()
         {
