@@ -38,12 +38,11 @@ public class Patterns {
         });
         t1.start();
         t2.start();
-        t1.join();
-        t2.join();
     }
  
     public static class Resource
     {
+        //creating the resource collector 
         LinkedList<Integer> list = new LinkedList<>();
 
         public void produce() throws InterruptedException
@@ -51,20 +50,16 @@ public class Patterns {
             int value = 0;
             while (true)
             {
-                //synchronized (this)    //as we only need the producer to produce he need not to worry about the synchronized
-                //{
-                    if (list.size()==2)
-                        //wait();
-                        Thread.sleep(1000);
-                    else{
-                        synchronized(list){
-                    System.out.println("Producer produced:"+ value);
-                    list.add(value++);
-                    //notify();
-                    Thread.sleep(1000);
-                        }
+                //checking wether the resource is full or not
+                if (list.size()==2){ 
+                }   
+                else{
+                    //making sure that at every instance list is being handled serially  
+                    synchronized(list){
+                        System.out.println("Producer produced:"+ value);
+                        list.add(value++);
                     }
-                //}
+                }
             }
         }
         
@@ -72,20 +67,15 @@ public class Patterns {
         {
             while (true)
             {
-                //synchronized (this)
-                //{
-                  if (list.size()==0)
-                      //wait();
-                      Thread.sleep(1000);
-                  else{
+                //checking the resource availability 
+                if (list.size()==0){
+                }  
+                else{
                   synchronized(list){    
-                  int val = list.removeFirst();
-                  System.out.println("Consumer consumed:"+ val);
-                  //notify();
-                  Thread.sleep(1000);
+                    int val = list.removeFirst();
+                    System.out.println("Consumer consumed:"+ val);
                   }
-                  }
-                //}
+                }
             }
         }
     }
