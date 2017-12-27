@@ -5,6 +5,10 @@ public class Patterns {
 
     public static void main(String[] args) throws InterruptedException
     {
+        
+        //TODO : This should be running indefinitely
+        //TODO : Shouldn't stop until I exit from app.
+        //TODO : Change this to two producers and four consumers.
         final Resource resource = new Resource();
         Thread t1 = new Thread(new Runnable()
         {
@@ -43,15 +47,19 @@ public class Patterns {
     public static class Resource
     {
         //creating the resource collector 
+        //TODO : Why you used linked list rather than other data structure,Reason? 
         LinkedList<Integer> list = new LinkedList<>();
 
         public void produce() throws InterruptedException
         {
             int value = 0;
+            //TODO : This one is called busy loop.
+            //TODO : Remove busy loop. And update your findings here.
             while (true)
             {
                 //checking wether the resource is full or not
                 if (list.size()==2){ 
+                    
                 }   
                 else{
                     //making sure that at every instance list is being handled serially  
