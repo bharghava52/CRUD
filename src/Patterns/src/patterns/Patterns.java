@@ -74,6 +74,7 @@ public class Patterns {
             
             while (true)
             {
+                //making sure that only one thread access the list at any particular instance
                 synchronized(list){
                     //TODO : This one is called busy loop.
                     /*
